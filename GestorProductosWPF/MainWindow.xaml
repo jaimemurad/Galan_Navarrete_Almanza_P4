@@ -1,0 +1,214 @@
+﻿<Window x:Class="GestorProductosWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestorProductosWPF"
+        mc:Ignorable="d"
+        Title="Gestor de Productos" Height="520" Width="900"
+        Background="#EEF2F6"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
+        <TabControl Background="#FFFFFF"
+                    BorderThickness="0"
+                    Padding="10">
+
+
+            <TabItem Header="Inventario">
+                <Grid Background="#F7F9FC">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- TARJETA DEL DATAGRID -->
+                    <Border Margin="20"
+                            Background="White"
+                            CornerRadius="10"
+                            BorderBrush="#CED4DA"
+                            BorderThickness="1"
+                            Padding="10"
+                            SnapsToDevicePixels="True">
+                        <DataGrid x:Name="dataGridProductos"
+                                  AutoGenerateColumns="True"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  IsReadOnly="True"
+                                  AlternatingRowBackground="#F0F4F8"
+                                  GridLinesVisibility="Horizontal"
+                                  BorderThickness="0"
+                                  RowHeaderWidth="0">
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="#0066CC"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="Padding" Value="8"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderBrush" Value="#D1D9E6"/>
+                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                </Style>
+                            </DataGrid.Resources>
+                        </DataGrid>
+                    </Border>
+
+                    <!-- BOTONES ABAJO -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,20">
+                        <Button x:Name="btnAgregar" Content="Agregar un producto"
+                                Width="200" Height="45"
+                                Background="#007ACC"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                
+                                BorderBrush="#005A9E"
+                                Click="btnAgregar_Click"/>
+
+                        <Button x:Name="btnEliminar" Content="Eliminar(selecciona un producto)"
+                                Width="200" Height="45"
+                                Background="#D32F2F"
+                                Foreground="White"
+                                FontWeight="Bold"
+  
+                                BorderBrush="#B71C1C"
+                                Click="btnEliminar_Click"/>
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Búsqueda">
+                <Grid Background="#F7F9FC">
+
+                    <!-- TARJETA -->
+                    <Border Margin="20"
+                            Background="White"
+                            CornerRadius="12"
+                            BorderBrush="#CED4DA"
+                            BorderThickness="1"
+                            Padding="20">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <ComboBox x:Name="comboTipoBusqueda"
+                                      Width="600" Height="35"
+                                      Background="#EDF1F5"
+                                      BorderBrush="#C5CDD8"
+                                      HorizontalAlignment="Center"/>
+
+                            <TextBox x:Name="txtBusqueda"
+                                     Grid.Row="1"
+                                     Margin="0,15,0,0"
+                                     Width="600" Height="35"
+                                     Background="White"
+                                     BorderBrush="#C5CDD8"
+                                     HorizontalAlignment="Center"/>
+
+                            <Button x:Name="btnBuscar"
+                                    Grid.Row="2"
+                                    Content="Buscar"
+                                    Width="200" Height="40"
+                                    Margin="0,20,0,0"
+                                    Background="#007ACC"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    BorderBrush="#005A9E"
+                                   
+                                    HorizontalAlignment="Center"
+                                    Click="btnBuscar_Click_1"/>
+
+                            <StackPanel Grid.Row="3" Margin="0,25,0,0" HorizontalAlignment="Center">
+                                <TextBlock x:Name="txtResultadoBusqueda"
+                                           Text="Resultado"
+                                           FontSize="16"
+                                           Foreground="#333"
+                                           TextAlignment="Center"
+                                           Width="400"/>
+
+                                <ProgressBar x:Name="progressIteraciones"
+                                             Height="35"
+                                             Margin="0,20,0,0"
+                                             Width="300"
+                                             Background="#E8EEF3"
+                                             Foreground="#007ACC"/>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </Border>
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Ordenamiento">
+                <Grid Background="#F7F9FC">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="25">
+                        <ComboBox x:Name="comboCriterioOrden"
+                                  Height="40"
+                                  Background="#EDF1F5"
+                                  BorderBrush="#C5CDD8"/>
+
+                        <Button x:Name="btnOrdenar" Content="Ordenar"
+                                Width="200" Height="45"
+                                Margin="0,20,0,0"
+                                Background="#007ACC"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                BorderBrush="#005A9E"
+                                
+                                Click="btnOrdenar_Click"/>
+
+                        <Border Margin="0,25,0,0"
+                                Background="White"
+                                CornerRadius="10"
+                                BorderBrush="#CED4DA"
+                                BorderThickness="1">
+                            <ListView x:Name="listViewOrdenados"
+                                      BorderThickness="0"
+                                      Padding="10">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Resultados"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Gráfico -->
+                    <Border
+                            Margin="449,25,10,25"
+                            Background="White"
+                            CornerRadius="10"
+                            BorderBrush="#CED4DA"
+                            BorderThickness="1"
+                            Padding="10" Grid.ColumnSpan="2">
+                        <Canvas x:Name="canvasGrafico" Background="#EEF2F6" Margin="-4,-3,-5,-9">
+
+                            <Rectangle Height="100" Width="40"
+                                     Canvas.Left="50"
+                                     Canvas.Top="120"
+                                     Fill="#6AA6E8"
+                                     RadiusX="4" RadiusY="4"/>
+                        </Canvas>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
